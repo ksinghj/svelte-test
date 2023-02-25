@@ -4,9 +4,11 @@
   import NameInput from './lib/NameInput.svelte'
 
   let count = 5
-  let name = ''
+  let name = 'kartar'
 
-  const handleValueChange = (e) => name = e.detail.value
+  const increment = () => {
+    count += 1
+  }
 </script>
 
 <main>
@@ -21,8 +23,8 @@
   <h1>Vite + Svelte</h1>
 
   <div class="card">
-    <Counter count={count} />
-    <NameInput on:valueChange={handleValueChange} value={name} />
+    <Counter on:increment={increment} count={count} />
+    <NameInput bind:text={name} />
   </div>
   <div class="card">
     Count: {count} <br />
