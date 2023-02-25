@@ -1,14 +1,22 @@
 <script lang="ts">
   import svelteLogo from './assets/svelte.svg'
+
   import Counter from './lib/Counter.svelte'
   import NameInput from './lib/NameInput.svelte'
   import TodoList from './lib/TodoList.svelte'
+  import WriteableList from './lib/WriteableList.svelte'
+
+  import { footballers } from './store/footballersStore'
 
   let count = 5
   let name = 'kartar'
 
   const increment = () => {
     count += 1
+  }
+
+  const handleAddBaller = (event) => {
+    $footballers = [...$footballers, event.detail.item]
   }
 </script>
 
@@ -35,6 +43,14 @@
   <div class="card">
     <TodoList />
   </div>
+
+  <div class="card">
+    <h2>Name as many footballers as you know:</h2>
+    <WriteableList item='Footballer' items={$footballers} on:add_item={handleAddBaller} />
+    {#each $footballers as baller}
+      <p>{baller}</p>
+    {/each}
+  </div>
 </main>
 
 <style>
@@ -49,8 +65,5 @@
   }
   .logo.svelte:hover {
     filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
   }
 </style>
