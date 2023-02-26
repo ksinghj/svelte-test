@@ -16,7 +16,9 @@
   }
 
   const handleAddBaller = (event) => {
-    $footballers = [...$footballers, event.detail.item]
+    footballers.set([...$footballers, event.detail.item])
+    // this would also work:
+    // $footballers = [...$footballers, event.detail.item]
   }
 </script>
 
@@ -50,6 +52,8 @@
     {#each $footballers as baller}
       <p>{baller}</p>
     {/each}
+    <button on:click={footballers.addGoat}>Add 🐐</button>
+    <button on:click={footballers.removeGoat}>Remove 🐐</button>
   </div>
 </main>
 
